@@ -7,70 +7,47 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-
-import com.xwysun.account.Utils.Utils;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.SaveListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
-    @Bind(R.id.Icon)
-    ImageView Icon;
-    @Bind(R.id.UserAccount)
-    EditText UserAccount;
-    @Bind(R.id.UserPassword)
-    EditText UserPassword;
-    @Bind(R.id.LoginButton)
-    Button LoginButton;
-
-    private String account;
-    private String passwd;
-    public static final String APPID="666fb08c0f0e22f9786b4cd9ef260a9e";
-
+    @Bind(R.id.backButton)
+    ImageView backButton;
+    @Bind(R.id.Logout)
+    TextView Logout;
+    @Bind(R.id.icon)
+    ImageView icon;
+    @Bind(R.id.UserName)
+    TextView UserName;
+    @Bind(R.id.add_record)
+    TextView addRecord;
+    @Bind(R.id.record_history)
+    TextView recordHistory;
+    @Bind(R.id.records_list)
+    TextView recordsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        Bmob.initialize(this, APPID);
-        if(BmobUser.getCurrentUser(this) != null){
-            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        }
-        final BmobUser user=new BmobUser();
-        LoginButton.setOnClickListener(new View.OnClickListener() {
+        Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                account=UserAccount.getText().toString().trim();
-                passwd=UserPassword.getText().toString().trim();
-                user.setUsername(account);
-                user.setPassword(passwd);
-                user.login(getApplicationContext(), new SaveListener() {
-                    @Override
-                    public void onSuccess() {
-                        Utils.toast(getApplication(),R.string.toast_login_success);
-                        Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s) {
-                        Utils.toast(getApplication(),s);
-                    }
-                });
+                BmobUser.logOut(getApplication());
+                BmobUser currentUser = BmobUser.getCurrentUser(getApplicationContext());
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -111,6 +88,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     };
-
-
 }

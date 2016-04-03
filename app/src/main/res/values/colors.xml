@@ -10,4 +10,6 @@
     <color name="colorBlueDark">#124393</color>
     <color name="colorEditBackground">#ffffff</color>
     <color name="colorEditStroke">#e0e0e0</color>
+    <color name="colorViewBackground">#eeeeee</color>
+    <color name="colorTitle">#595959</color>
 </resources>

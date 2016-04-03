@@ -3,6 +3,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_login_textSize">16sp</dimen>
+    <dimen name="activity_logout_textSize">16sp</dimen>
     <dimen name="activity_login_editPadding">8dp</dimen>
-    <dimen name="icon_size">64dp</dimen>
+    <dimen name="icon_size">96dp</dimen>
+    <dimen name="activity_records_top">200dp</dimen>
+    <dimen name="activity_records_marginLeft">20dp</dimen>
+    <dimen name="activity_records_marginTop">6dp</dimen>
+    <dimen name="activity_login_titleSize">24sp</dimen>
+    <dimen name="activity_home_mid">32dp</dimen>
+    <dimen name="activity_home_line">8dp</dimen>
 </resources>
