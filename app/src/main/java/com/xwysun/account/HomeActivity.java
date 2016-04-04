@@ -30,20 +30,43 @@ public class HomeActivity extends AppCompatActivity {
     TextView recordHistory;
     @Bind(R.id.records_list)
     TextView recordsList;
-
+    private BmobUser currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        currentUser= BmobUser.getCurrentUser(getApplicationContext());
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BmobUser.logOut(getApplication());
-                BmobUser currentUser = BmobUser.getCurrentUser(getApplicationContext());
+                currentUser = BmobUser.getCurrentUser(getApplicationContext());
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        UserName.setText(currentUser.getUsername());
+        addRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AddRecordActivity.class);
+                startActivity(intent);
+            }
+        });
+        recordsList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, RecordsActivity.class);
+                startActivity(intent);
+            }
+        });
+        recordHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, HistoryActivity.class);
+                startActivity(intent);
             }
         });
     }

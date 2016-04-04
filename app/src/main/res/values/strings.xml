@@ -12,4 +12,6 @@
     <string name="addRecord">添加记录</string>
     <string name="recordHistory">添加历史</string>
     <string name="recordsList">查看总表</string>
+    <string name="chooseByRule">筛选</string>
+    <string name="add">添加</string>
 </resources>

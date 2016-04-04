@@ -12,4 +12,5 @@
     <dimen name="activity_login_titleSize">24sp</dimen>
     <dimen name="activity_home_mid">32dp</dimen>
     <dimen name="activity_home_line">8dp</dimen>
+    <dimen name="activity_base_toolbar">50dp</dimen>
 </resources>

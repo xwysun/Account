@@ -40,11 +40,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        Bmob.initialize(this, APPID);
-        if(BmobUser.getCurrentUser(this) != null){
+        Bmob.initialize(getApplication(), APPID);
+        if(BmobUser.getCurrentUser(getApplication())!= null){
             Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         }
         final BmobUser user=new BmobUser();
         LoginButton.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        finish();
                     }
 
                     @Override
