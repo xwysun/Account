@@ -12,4 +12,5 @@
     <color name="colorEditStroke">#e0e0e0</color>
     <color name="colorViewBackground">#eeeeee</color>
     <color name="colorTitle">#595959</color>
+    <color name="toolBarTitle">#ffffff</color>
 </resources>

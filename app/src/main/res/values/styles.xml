@@ -1,12 +1,15 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="AppTheme.Base"/>
+    <!-- Base application theme. -->
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-
-    </style>
-    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
-        <item name="actionMenuTextColor">@color/colorLoginText</item>
+        <!--<item name="android:windowActionBar">false</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <item name="colorPrimary">@color/colorBlueLight</item>
+        <item name="colorPrimaryDark">@color/colorBlueLight</item>
+        <item name="colorAccent">@color/colorBlueLight</item>
     </style>
     <style name="login_button_style">
         <item name="android:layout_width">match_parent</item>
