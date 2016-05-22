@@ -12,7 +12,7 @@ import com.xwysun.account.Utils.Utils;
 /**
  * Created by xwysun on 2016/4/4.
  */
-public class RecordsActivity extends BaseActivity {
+public class SellActivity extends BaseActivity {
 
         @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_records, menu);
@@ -31,7 +31,7 @@ public class RecordsActivity extends BaseActivity {
 
     @Override
     public void setToolbarTitle(Toolbar toolbar, TextView centerTitle) {
-
+            centerTitle.setText(R.string.sell_list);
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {

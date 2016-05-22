@@ -3,19 +3,15 @@ package com.xwysun.account;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
- * Created by xwysun on 2016/4/4.
+ * Created by xwysun on 2016/5/21.
  */
-public class AddRecordActivity extends BaseActivity {
-
-
+public class UpdateComActivity extends BaseActivity {
     @Override
     public Fragment getContainFragment() {
-        return new Fragment();
+        return UpdateComFragment.newInstance(getIntent().getExtras());
     }
 
     @Override

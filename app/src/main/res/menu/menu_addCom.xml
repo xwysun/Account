@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SellActivity">
-    <item android:id="@+id/actionAdd"
-        android:title="@string/chooseByRule"
+    <item android:id="@+id/addCom"
+        android:title="@string/commit"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"/>
 </menu>

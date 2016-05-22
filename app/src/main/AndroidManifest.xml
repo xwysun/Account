@@ -24,11 +24,13 @@
         </activity>
         <activity android:name=".HomeActivity" />
         <activity
-            android:name=".RecordsActivity"
+            android:name=".SellActivity"
             />
-        <activity android:name=".AddRecordActivity"
+        <activity android:name=".CommodityActivity"
             />
         <activity android:name=".HistoryActivity"
+            />
+        <activity android:name=".UpdateComActivity"
             />
     </application>
 

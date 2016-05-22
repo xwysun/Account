@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,18 +26,19 @@ public class HomeActivity extends AppCompatActivity {
     @Bind(R.id.UserName)
     TextView UserName;
     @Bind(R.id.add_record)
-    TextView addRecord;
+    Button addRecord;
     @Bind(R.id.record_history)
-    TextView recordHistory;
+    Button recordHistory;
     @Bind(R.id.records_list)
-    TextView recordsList;
+    Button recordsList;
     private BmobUser currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        currentUser= BmobUser.getCurrentUser(getApplicationContext());
+        currentUser = BmobUser.getCurrentUser(getApplicationContext());
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,14 +53,14 @@ public class HomeActivity extends AppCompatActivity {
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AddRecordActivity.class);
+                Intent intent = new Intent(HomeActivity.this, CommodityActivity.class);
                 startActivity(intent);
             }
         });
         recordsList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, RecordsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SellActivity.class);
                 startActivity(intent);
             }
         });

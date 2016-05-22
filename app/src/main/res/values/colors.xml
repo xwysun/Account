@@ -13,4 +13,7 @@
     <color name="colorViewBackground">#eeeeee</color>
     <color name="colorTitle">#595959</color>
     <color name="toolBarTitle">#ffffff</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="secondary_text">#727272</color>
 </resources>

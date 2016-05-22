@@ -60,7 +60,7 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:drawableLeft="@drawable/add_record"-->
         <!--android:drawableStart="@drawable/add_record"/>-->
-    <TextView
+    <Button
         android:id="@+id/add_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,9 +76,9 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:drawablePadding="@dimen/activity_horizontal_margin"
-        android:text="@string/addRecord"
+        android:text="@string/commodityList"
         android:gravity="center|left"/>
-    <TextView
+    <Button
         android:id="@+id/record_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
         android:drawablePadding="@dimen/activity_horizontal_margin"
         android:text="@string/recordHistory"
         android:gravity="center|left"/>
-    <TextView
+    <Button
         android:id="@+id/records_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
