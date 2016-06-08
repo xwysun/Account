@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.xwysun.account.Bean.Commodity;
 import com.xwysun.account.Bean.RequestBean;
+import com.xwysun.account.Bean.SellBean;
+import com.xwysun.account.Bean.SellRecords;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,34 @@ public class CommodityNetworkUtils {
             }
         }
         );
+    }
+    public static void getSellRecords(RequestBean requestBean, final Handler handler){
+        final ArrayList<SellRecords> sellRecords=new ArrayList<>();
+        BmobQuery<SellRecords> query = new BmobQuery<SellRecords>();
+        final Bundle bundle=new Bundle();
+        final Message message=new Message();
+        query.addWhereEqualTo("user",requestBean.getUser());
+        query.setLimit(50);
+        query.findObjects(requestBean.getContext(), new FindListener<SellRecords>() {
+                    @Override
+                    public void onSuccess(List<SellRecords> list) {
+                            Log.d(TAG,"listsize"+list.size());
+                        sellRecords.addAll(list);
+                        message.what=1;
+                        bundle.putSerializable(DATA,sellRecords);
+                        message.setData(bundle);
+                        handler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        Log.e(TAG,s);
+                        message.what=0;
+                        handler.sendMessage(message);
+                    }
+                }
+        );
+
     }
 
 }

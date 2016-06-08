@@ -15,4 +15,5 @@
     <dimen name="activity_base_toolbar">50dp</dimen>
     <dimen name="frag_updateCom_firstLine">100dp</dimen>
     <dimen name="frag_updateCom_nextLine">50dp</dimen>
+    <dimen name="spinner_width">150dp</dimen>
 </resources>

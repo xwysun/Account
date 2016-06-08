@@ -27,10 +27,10 @@ public class HomeActivity extends AppCompatActivity {
     TextView UserName;
     @Bind(R.id.add_record)
     Button addRecord;
-    @Bind(R.id.record_history)
-    Button recordHistory;
     @Bind(R.id.records_list)
     Button recordsList;
+    @Bind(R.id.sell_records)
+    Button sellRecords;
     private BmobUser currentUser;
 
     @Override
@@ -64,10 +64,10 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        recordHistory.setOnClickListener(new View.OnClickListener() {
+        sellRecords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, HistoryActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SellActivity.class);
                 startActivity(intent);
             }
         });

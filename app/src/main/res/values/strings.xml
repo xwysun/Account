@@ -22,4 +22,11 @@
     <string name="wait_commit">待提交：</string>
     <string name="commit">提交</string>
     <string name="sell_list">销售记录</string>
+    <string name="chooseTitle">筛选</string>
+    <string name="chooseName">商品名称：</string>
+    <string name="chooseUser">用户名称：</string>
+    <string name="chooseTime">筛选时间：</string>
+    <string name="confirm">确认</string>
+    <string name="sellRecords">销售记录</string>
+
 </resources>

@@ -32,6 +32,10 @@
             />
         <activity android:name=".UpdateComActivity"
             />
+        <activity android:name=".SellDetailActivity"
+            />
+        <activity android:name=".SellEditActivity"
+            />
     </application>
 
 </manifest>
