@@ -26,7 +26,13 @@ public class SellEditAdapter extends RecyclerView.Adapter<SellEditAdapter.ViewHo
     public Context context;
     private LayoutInflater inflater;
     double sales;
-
+    public interface OnFocusLostListener{
+        void Onchange();
+    }
+    private OnFocusLostListener onFocusLostListener;
+    public void setOnFocusLostListener(OnFocusLostListener listener){
+        this.onFocusLostListener=listener;
+    }
     public SellEditAdapter(Context c, ArrayList<SellBean> list) {
         context = c;
         sellBeen = list;
@@ -56,10 +62,11 @@ public class SellEditAdapter extends RecyclerView.Adapter<SellEditAdapter.ViewHo
                     if (!holder.detailSaleEdit.getText().toString().trim().equals("")){
                         sales=Integer.parseInt(holder.detailSaleEdit.getText().toString().trim());
                         sellBean.setSales(sales);
-                        sellBean.setSaleMoney(sales*sellBean.getCommodity().getPrice()/1000);
+                        sellBean.setSaleMoney(sales*sellBean.getCommodity().getPrice());
                     }else {
                         sellBean.setSales(0);
                     }
+                    onFocusLostListener.Onchange();
                 }
             }
         });

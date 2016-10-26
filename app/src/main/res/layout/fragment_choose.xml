@@ -46,6 +46,7 @@
             android:layout_height="@dimen/spinner_width"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/userLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"

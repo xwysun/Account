@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_title"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/activity_horizontal_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    >
     <TextView
+        android:id="@+id/com_name"
         android:padding="4dp"
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_height="wrap_content"
-        android:background="@color/colorBlueLight"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="商品名称"
         android:textSize="16sp"
-        android:textColor="#FFF"/>
+        />
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/divider"
         />
     <TextView
+        android:id="@+id/com_sale"
         android:layout_width="0dp"
         android:padding="4dp"
         android:layout_weight="1"
-        android:background="@color/colorBlueLight"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="销售数量（kg）"
         android:textSize="16sp"
-        android:textColor="#FFF"/>
+       />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/divider"
+        />
+    <TextView
+        android:id="@+id/com_money"
+        android:layout_width="0dp"
+        android:padding="4dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        />
 </LinearLayout>

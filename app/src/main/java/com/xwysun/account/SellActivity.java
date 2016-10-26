@@ -16,6 +16,7 @@ import com.xwysun.account.Utils.Utils;
  */
 public class SellActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
+    private SellFragment sellFragment;
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_records, menu);
         return super.onCreateOptionsMenu(menu);
@@ -23,12 +24,13 @@ public class SellActivity extends BaseActivity {
 
     @Override
     public Fragment getContainFragment() {
-        return SellFragment.newInstance(getIntent().getExtras());
+        sellFragment=SellFragment.newInstance(getIntent().getExtras());
+        return sellFragment;
     }
 
     @Override
     public Fragment getRightFragment() {
-        return ChooseFragment.newInstance(this,getIntent().getExtras());
+        return ChooseFragment.newInstance(this,getIntent().getExtras(),sellFragment,drawerLayout);
     }
 
     @Override

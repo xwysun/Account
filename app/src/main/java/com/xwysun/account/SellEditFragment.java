@@ -13,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.squareup.okhttp.internal.Util;
 import com.xwysun.account.Bean.Commodity;
 import com.xwysun.account.Bean.RequestBean;
 import com.xwysun.account.Bean.SellBean;
@@ -31,6 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by xwysun on 2016/5/25.
@@ -38,11 +39,12 @@ import cn.bmob.v3.listener.SaveListener;
 public class SellEditFragment extends Fragment {
     SellEditAdapter adapter;
     BmobUser user;
-    SellRecords record=new SellRecords();
+    SellRecords record = new SellRecords();
+    int updateNum=0;
     ArrayList<SellBean> sellBeen = new ArrayList<>();
     ArrayList<Commodity> commodities = new ArrayList<>();
     public RequestBean request = new RequestBean();
-    public static final String TAG="editSellFrg";
+    public static final String TAG = "editSellFrg";
     Handler mhandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -61,11 +63,10 @@ public class SellEditFragment extends Fragment {
             }
         }
     };
-
     @Bind(R.id.detail_edit_sum)
     EditText detailEditSum;
-    @Bind(R.id.edit_sum)
-    LinearLayout editSum;
+    @Bind(R.id.detail_edit_sum_expect)
+    TextView detailEditSumExpect;
     @Bind(R.id.detail_list_edit)
     RecyclerView detailListEdit;
 
@@ -93,7 +94,8 @@ public class SellEditFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        user=BmobUser.getCurrentUser(getActivity().getApplicationContext());
+        user = BmobUser.getCurrentUser(getActivity().getApplicationContext());
+        record.setUserName(user.getUsername());
         record.setUser(user);
         record.setSellBeen(sellBeen);
         request.setUser(user);
@@ -110,15 +112,21 @@ public class SellEditFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                   detailEditSum.setText("");
-                } else if (detailEditSum!=null){
-                    if (!detailEditSum.getText().toString().trim().equals("")){
+                    detailEditSum.setText("");
+                } else if (detailEditSum != null) {
+                    if (!detailEditSum.getText().toString().trim().equals("")) {
                         record.setSaleSum(Integer.parseInt(detailEditSum.getText().toString().trim()));
-                        Log.d(TAG,detailEditSum.getText().toString());
-                    }else {
+                        Log.d(TAG, detailEditSum.getText().toString());
+                    } else {
                         record.setSaleSum(0);
                     }
                 }
+            }
+        });
+        adapter.setOnFocusLostListener(new SellEditAdapter.OnFocusLostListener() {
+            @Override
+            public void Onchange() {
+                detailEditSumExpect.setText(String.format("%.2f", mathSum()));
             }
         });
     }
@@ -128,27 +136,76 @@ public class SellEditFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-    public double mathSum(){
-        double sum=0;
-        for (SellBean s:sellBeen
-             ) {
-            sum+=s.getSaleMoney();
+
+    public double mathSum() {
+        double sum = 0;
+        for (SellBean s : sellBeen
+                ) {
+            sum += s.getSaleMoney();
         }
         return sum;
     }
-   public void commitDetail(){
-       Log.d(TAG,record.toString());
-       record.setSaleSum_expect(mathSum());
-        record.save(getActivity(), new SaveListener() {
-            @Override
-            public void onSuccess() {
-                Utils.toast(getActivity(),"成功");
-            }
 
-            @Override
-            public void onFailure(int i, String s) {
-                Utils.toast(getActivity(),s);
+    public void commitDetail() {
+        Log.d(TAG, record.toString());
+        record.setSaleSum_expect(mathSum());
+        if (detailEditSum != null) {
+            if (!detailEditSum.getText().toString().trim().equals("")) {
+                record.setSaleSum(Double.parseDouble(detailEditSum.getText().toString().trim()));
+                Log.d(TAG, detailEditSum.getText().toString());
+            } else {
+                record.setSaleSum(0);
             }
-        });
-   }
+        }
+        if (updateCommodity()){
+            record.save(getActivity(), new SaveListener() {
+                @Override
+                public void onSuccess() {
+                    Utils.toast(getActivity(), "成功");
+                    getActivity().finish();
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    Utils.toast(getActivity(), s);
+                }
+            });
+        }
+    }
+    public boolean updateCommodity(){
+        updateNum=0;
+        ArrayList<SellBean> updatedData=record.getSellBeen();
+        ArrayList<Commodity> commodities=new ArrayList<>();
+        for (int i=0;i<updatedData.size();i++){
+            Commodity commodity=updatedData.get(i).getCommodity();
+            double stock=commodity.getStock()-updatedData.get(i).getSales();
+            if (stock<0){
+                Utils.toast(getActivity(),commodity.getName()+"库存不足");
+                return false;
+            }
+            commodity.setStock(stock);
+            commodities.add(commodity);
+        }
+        for (int i=0;i<commodities.size();i++){
+            commodities.get(i).update(getActivity(), new UpdateListener() {
+                @Override
+                public void onSuccess() {
+                    updateNum++;
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    Log.e("update",s);
+                    Utils.toast(getActivity(),"数据上传发生意外，请检查服务器相关数据");
+                }
+            });
+        }
+//        if (updateNum!=commodities.size()-1){
+//            Utils.toast(getActivity(),"数据上传发生意外，请检查服务器相关数据");
+//            return false;
+//        }
+        return true;
+    }
+
+
 }

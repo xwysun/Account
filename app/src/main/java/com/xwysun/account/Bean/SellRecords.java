@@ -14,6 +14,15 @@ public class SellRecords extends BmobObject implements Serializable{
     private ArrayList<SellBean> sellBeen;
     private double saleSum;
     private double saleSum_expect;
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public double getSaleSum_expect() {
         return saleSum_expect;
@@ -29,6 +38,8 @@ public class SellRecords extends BmobObject implements Serializable{
                 "user=" + user +
                 ", sellBeen=" + sellBeen +
                 ", saleSum=" + saleSum +
+                ", saleSum_expect=" + saleSum_expect +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 

@@ -75,4 +75,27 @@ public class Commodity extends BmobObject implements Serializable{
     public String toString() {
         return name+" "+price+" "+oldStock+" "+stock+" ";
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + getObjectId().hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this==o){
+            return true;
+        }
+        if (o==null){
+            return  false;
+        }
+        Commodity other=(Commodity)o;
+        if (this.getObjectId().equals(other.getObjectId())){
+            return true;
+        }
+        return false;
+    }
 }

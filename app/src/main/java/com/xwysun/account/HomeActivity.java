@@ -57,13 +57,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        recordsList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SellActivity.class);
-                startActivity(intent);
-            }
-        });
         sellRecords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +64,14 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        recordsList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, CountActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

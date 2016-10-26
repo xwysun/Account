@@ -43,10 +43,10 @@ public class UpdateComAdapter extends RecyclerView.Adapter<UpdateComAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Commodity itemCommodity=commodities.get(holder.getAdapterPosition());
-        holder.commodityName.setText("商品名称："+itemCommodity.getName());
-        holder.commodityStock.setText("剩余库存："+itemCommodity.getStock());
-        holder.commodityOldStock.setText("基础库存"+itemCommodity.getOldStock());
-        holder.commodityPrice.setText("价格(￥):"+itemCommodity.getPrice());
+        holder.commodityName.setText("商品名称 ："+itemCommodity.getName());
+        holder.commodityStock.setText("剩余库存（kg）："+itemCommodity.getStock());
+        holder.commodityOldStock.setText("基础库存（kg）："+itemCommodity.getOldStock());
+        holder.commodityPrice.setText("单价(元/kg）："+itemCommodity.getPrice());
     }
 
 

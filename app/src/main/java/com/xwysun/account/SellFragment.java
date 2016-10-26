@@ -20,11 +20,13 @@ import com.xwysun.account.Bean.Commodity;
 import com.xwysun.account.Bean.RequestBean;
 import com.xwysun.account.Bean.SellBean;
 import com.xwysun.account.Bean.SellRecords;
+import com.xwysun.account.OpenSrc.EndlessRecyclerOnScrollListener;
 import com.xwysun.account.Utils.CommodityNetworkUtils;
 import com.xwysun.account.Utils.Utils;
 import com.xwysun.account.adapter.SellListAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,11 +66,31 @@ public class SellFragment extends Fragment {
             }
         }
     };
+    Handler loadMorehandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    sellRecordses.addAll((ArrayList<SellRecords>)msg.getData().getSerializable(CommodityNetworkUtils.DATA));
+                    Log.d(TAG,"size"+sellRecordses.size());
+                    adapter.notifySell(sellRecordses);
+                    break;
+                case 0:
+                    Utils.toast(getActivity(),"请求失败");
+            }
+        }
+    };
 
     public static SellFragment newInstance(Bundle args) {
         SellFragment fragment = new SellFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -87,8 +109,11 @@ public class SellFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        request.setUser(BmobUser.getCurrentUser(getActivity().getApplicationContext()));
+        BmobUser user=BmobUser.getCurrentUser(getActivity().getApplicationContext());
+        Log.d(TAG,user.getUsername());
+        request.setUser(user);
         request.setContext(getActivity());
+        request.setSkipNum(0);
         adapter = new SellListAdapter(getActivity(), sellRecordses);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -96,7 +121,15 @@ public class SellFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                    CommodityNetworkUtils.getSellRecords(request,mhandler);
+                request.setSkipNum(0);
+                CommodityNetworkUtils.getSellRecords(request,mhandler);
+            }
+        });
+        sellList.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int current_page) {
+                request.setSkipNum(sellRecordses.size());
+                CommodityNetworkUtils.getSellRecords(request,loadMorehandler);
             }
         });
         adapter.setOnItemClickListener(new SellListAdapter.OnItemClickListener() {
@@ -108,6 +141,7 @@ public class SellFragment extends Fragment {
             }
         });
         sellList.setAdapter(adapter);
+        Log.i(TAG,"onCreate"+request.toString());
         CommodityNetworkUtils.getSellRecords(request,mhandler);
         sellActionAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,10 +152,30 @@ public class SellFragment extends Fragment {
         });
 
     }
+    public void setRequestChoose(long date,BmobUser user){
+        if (date!=0){
+            request.setDate(new Date(date));
+        }else {
+            request.setDate(null);
+        }
+        if (user!=null){
+            request.setUser(user);
+        }
+        request.setSkipNum(0);
+        CommodityNetworkUtils.getSellRecords(request,mhandler);
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG,"onResume"+request.toString());
+        request.setSkipNum(0);
+        CommodityNetworkUtils.getSellRecords(request,mhandler);
     }
 }

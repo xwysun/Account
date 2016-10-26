@@ -5,6 +5,7 @@
         <include
             layout="@layout/layout_title"
             android:id="@+id/edit_title"/>
+
         <LinearLayout
             android:id="@+id/edit_sum"
             android:orientation="horizontal"
@@ -21,7 +22,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorBlueLight"
                     android:gravity="center"
-                    android:text="总销售额（￥）："
+                    android:text="实际销售额（￥）："
                     android:textSize="16sp"
                     android:textColor="#FFF"/>
                 <View
@@ -44,10 +45,51 @@
                     android:textSize="16sp"
                     android:textColorHint="#FFF"/>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/edit_sum_expect"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/edit_sum"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider"
+                    />
+                <TextView
+                    android:padding="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="理论销售额（￥）："
+                    android:textSize="16sp" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider"
+                    />
+                <TextView
+                    android:id="@+id/detail_edit_sum_expect"
+                    android:textCursorDrawable="@null"
+                    android:layout_width="0dp"
+                    android:padding="4dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="16sp" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider"
+                    />
+        </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/detail_list_edit"
             android:layout_below="@id/edit_title"
-            android:layout_above="@id/edit_sum"
+            android:layout_above="@id/edit_sum_expect"
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"

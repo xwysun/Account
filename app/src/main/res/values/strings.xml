@@ -16,9 +16,9 @@
     <string name="chooseByRule">筛选</string>
     <string name="add">添加</string>
     <string name="item_name">商品名称：</string>
-    <string name="item_stock">剩余库存：</string>
-    <string name="item_old_stock">期初库存:</string>
-    <string name="item_price">商品单价（100g）:</string>
+    <string name="item_stock">剩余库存(kg)：</string>
+    <string name="item_old_stock">期初库存(kg):</string>
+    <string name="item_price">商品单价（每kg）:</string>
     <string name="wait_commit">待提交：</string>
     <string name="commit">提交</string>
     <string name="sell_list">销售记录</string>
